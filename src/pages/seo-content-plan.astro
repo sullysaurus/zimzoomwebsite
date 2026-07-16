@@ -136,7 +136,7 @@ const roadmap = [
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="description" content="Keyword-led organic search and content growth plan for ZimZoom Photo Booth." />
     <link rel="icon" href="/images/seal.png" />
     <meta property="og:type" content="article" />
@@ -381,7 +381,63 @@ const roadmap = [
     .report-header { grid-template-columns:1fr auto; }.report-header nav{display:none}.report-hero{grid-template-columns:1fr 1fr}.hero-title{grid-column:1/-1}.hero-aside{grid-column:2}.hero-sticker{right:7vw;top:18%}.executive{grid-template-columns:1fr}.metric-grid{grid-template-columns:1fr 1fr}.metric:nth-child(2){border-right:0}.metric:nth-child(-n+2){border-bottom:2px solid var(--ink)}.priority-heading,.content-heading,.location-heading,.roadmap-heading{grid-template-columns:1fr}.table-head{display:none}.table-row{grid-template-columns:50px 1fr 100px 80px}.table-row p{grid-column:2/4}.table-row em{grid-column:4;grid-row:2}.roadmap-grid{grid-template-columns:1fr}.roadmap-grid>article{min-height:400px}.measure-list{grid-template-columns:1fr 1fr}.measure-list article:nth-child(2){border-right:0}.measure-list article:nth-child(-n+2){border-bottom:1px solid #555}.methodology{grid-template-columns:.5fr 1.5fr}.method-stamp{grid-column:2}
   }
   @media(max-width:700px){
-    .report-header{height:62px;padding:0 5vw}.report-mark{font-size:1.25rem}.share-button{font-size:0;width:42px;height:42px;padding:0}.share-button span{font-size:1rem;margin:0}.report-hero{height:auto;min-height:740px;padding:4rem 6vw 6rem;display:block}.hero-kicker b{display:none}.hero-title{margin-top:8rem}.hero-title h1{font-size:clamp(4.2rem,20vw,6rem);line-height:.78}.hero-title h1 i{transform:rotate(-4deg) translateX(8vw)}.hero-aside{margin:3rem 0 0 26%;}.hero-sticker{width:105px;height:105px;right:7vw;top:10rem;box-shadow:7px 7px 0 var(--coral)}.hero-sticker b{font-size:2.5rem}.hero-sticker span{font-size:.44rem}.hero-strip{justify-content:flex-start;overflow:hidden}.hero-strip span:nth-child(n+4){display:none}.section-pad{padding:5.5rem 6vw}.section-label{margin-bottom:3rem}.executive h2,.demand-intro h2,.priority-heading h2,.content-heading h2,.location-heading h2,.roadmap-heading h2,.measure-copy h2{font-size:clamp(3.2rem,15vw,5.5rem)}.lede{font-size:1rem}.metric-grid{grid-template-columns:1fr}.metric{border-right:0!important;border-bottom:2px solid var(--ink)!important;min-height:190px}.metric:last-child{border-bottom:0!important}.demand-section,.measure-section{grid-template-columns:1fr}.demand-row{grid-template-columns:1fr;gap:.7rem}.demand-track{height:32px}.strategy-note{grid-column:1;grid-template-columns:1fr}.content-grid{grid-template-columns:1fr}.idea-card{min-height:550px;padding:1.5rem}.idea-card h3{font-size:2.5rem}.location-chart article{grid-template-columns:34px 1fr 70px;gap:1rem;padding:1rem 0}.location-bar{grid-column:2/4;width:100%}.local-rule{grid-template-columns:1fr;gap:1rem}.measure-list{grid-template-columns:1fr}.measure-list article{border-right:0;border-bottom:1px solid #555!important}.methodology{grid-template-columns:1fr}.method-stamp{grid-column:1;justify-self:start}.report-footer{grid-template-columns:1fr;gap:1.5rem}.report-footer p{margin:0}.report-footer a{justify-self:start}.table-row{grid-template-columns:36px 1fr 70px;padding:1rem .8rem;gap:.8rem}.table-row>b:nth-of-type(2){display:none}.table-row p{grid-column:2/4;margin:.2rem 0}.table-row em{grid-column:2;grid-row:auto}.table-row h3{font-size:.9rem}.roadmap-grid>article{min-height:450px}
+    .report-header{height:62px;padding:0 5vw}
+    .report-mark{font-size:1.25rem}
+    .share-button{font-size:0;width:42px;height:42px;padding:0}
+    .share-button span{font-size:0;margin:0}
+    .share-button span::before{content:'→';display:block;font-family:'Manrope',sans-serif;font-size:1rem;transform:rotate(-45deg)}
+    .report-hero{height:auto;min-height:720px;padding:3.5rem 6vw 6rem;display:block}
+    .hero-kicker b{display:none}
+    .hero-title{margin-top:7rem}
+    .hero-title>p{font-size:.68rem;line-height:1.5;max-width:13rem}
+    .hero-title h1{font-size:clamp(3.25rem,16.5vw,4.5rem);line-height:.8}
+    .hero-title h1 i{transform:rotate(-4deg) translateX(5vw)}
+    .hero-aside{margin:2.25rem 0 0;max-width:22rem}
+    .hero-aside p{font-size:1rem;line-height:1.6}
+    .hero-sticker{width:82px;height:82px;right:7vw;top:7rem;box-shadow:6px 6px 0 var(--coral)}
+    .hero-sticker b{font-size:2rem}
+    .hero-sticker span{font-size:.38rem;margin-top:.45rem}
+    .hero-strip{display:grid;grid-template-columns:1fr 1fr;gap:0;text-align:center;overflow:hidden}
+    .hero-strip span:nth-child(n+3){display:none}
+    .section-pad{padding:4rem 5vw}
+    .section-label{margin-bottom:0}
+    .executive{gap:2.25rem}
+    .priority-heading,.content-heading,.location-heading,.roadmap-heading{gap:1rem;margin:2rem 0 3rem}
+    .executive h2,.demand-intro h2,.priority-heading h2,.content-heading h2,.location-heading h2,.roadmap-heading h2,.measure-copy h2{font-size:clamp(2.65rem,12vw,4.2rem);line-height:.9}
+    .executive h2 i,.demand-intro h2 i,.priority-heading h2 i,.content-heading h2 i,.location-heading h2 i,.roadmap-heading h2 i,.measure-copy h2 i{display:inline-block;line-height:1}
+    .lede{font-size:1rem}
+    .metric-grid{grid-template-columns:1fr}
+    .metric{border-right:0!important;border-bottom:2px solid var(--ink)!important;min-height:165px;padding:1.5rem}
+    .metric:last-child{border-bottom:0!important}
+    .demand-section,.measure-section{grid-template-columns:1fr;gap:2.5rem}
+    .demand-row{grid-template-columns:1fr;gap:.7rem}
+    .demand-track{height:32px}
+    .strategy-note{grid-column:1;grid-template-columns:1fr;padding:1.5rem}
+    .strategy-note p{font-size:1rem}
+    .content-grid,.idea-card,.methodology,.methodology>*{min-width:0}
+    .content-grid{grid-template-columns:minmax(0,1fr)}
+    .idea-card{min-height:0;padding:1.5rem}
+    .idea-card h3{font-size:clamp(2rem,10vw,2.7rem)}
+    .idea-card li,.idea-card footer,.methodology p{overflow-wrap:anywhere}
+    .location-chart article{grid-template-columns:34px minmax(0,1fr) 70px;gap:1rem;padding:1rem 0}
+    .location-bar{grid-column:2/4;width:100%}
+    .local-rule{grid-template-columns:1fr;gap:1rem;margin-top:2.5rem;padding:1.5rem}
+    .measure-list{grid-template-columns:1fr}
+    .measure-list article{min-height:0;padding:1.5rem 0;border-right:0;border-bottom:1px solid #555!important}
+    .measure-list h3{margin:1.5rem 0 .75rem}
+    .methodology{grid-template-columns:minmax(0,1fr);gap:2rem}
+    .method-stamp{grid-column:1;justify-self:start;width:150px;height:150px}
+    .report-footer{grid-template-columns:1fr;gap:1.5rem;padding:2.5rem 5vw}
+    .report-footer p{margin:0}
+    .report-footer a{justify-self:start}
+    .table-row{grid-template-columns:28px minmax(0,1fr) 62px;padding:1rem .75rem;gap:.65rem}
+    .table-row>b:nth-of-type(2){display:none}
+    .table-row p{grid-column:2/4;margin:.2rem 0;font-size:.86rem}
+    .table-row em{grid-column:2;grid-row:auto}
+    .table-row h3{font-size:.9rem;overflow-wrap:anywhere}
+    .table-note{font-size:.82rem}
+    .roadmap-grid>article{min-height:0;padding:1.5rem}
+    .roadmap-grid h3{margin:2.5rem 0 1.5rem}
   }
   @media(prefers-reduced-motion:reduce){.reveal-now,.demand-track span{animation:none}}
   @media print { .report-header,.grain,.share-button{display:none!important}.report-hero{min-height:650px;height:auto}.section-pad{padding:3rem 4vw}.idea-card,.roadmap-grid>article,.metric{break-inside:avoid}.content-section,.demand-section,.measure-section{print-color-adjust:exact;-webkit-print-color-adjust:exact} }
