@@ -1,0 +1,194 @@
+---
+import { bookingUrl, slides } from '../data/slideshow';
+
+const slideDuration = 8500;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Explore ZimZoom photo booth experiences and check availability for your event." />
+    <meta name="theme-color" content="#202945" />
+    <title>ZimZoom Experiences</title>
+  </head>
+  <body data-duration={slideDuration}>
+    <main class="show" aria-roledescription="carousel" aria-label="ZimZoom photo booth experiences">
+      <header class="show-header">
+        <a class="logo" href="/" aria-label="ZimZoom home">ZIM<span>ZOOM</span></a>
+        <a class="book book-header" href={bookingUrl}>Book now <span>↗</span></a>
+      </header>
+
+      <div class="slides" aria-live="polite">
+        {slides.map((slide, index) => (
+          <article
+            class={`slide slide-${slide.theme} ${slide.final ? 'slide-final' : ''}`}
+            data-slide={index}
+            aria-hidden={index === 0 ? 'false' : 'true'}
+          >
+            <div class="photo" style={`--image:url('${slide.image}');--position:${slide.position};--filter:${slide.filter}`} role="img" aria-label={slide.imageAlt}></div>
+            <div class="wash"></div>
+            <div class="shape" aria-hidden="true"></div>
+            <div class="copy">
+              <p class="eyebrow"><span>{slide.number}</span>{slide.eyebrow}</p>
+              <h1>{slide.title}</h1>
+              <p class="script">{slide.script}</p>
+              <p class="description">{slide.description}</p>
+              <a class="book book-main" href={bookingUrl}>{slide.final ? 'Check your date' : 'See your options'} <span>↗</span></a>
+            </div>
+            <p class="service-note">Serving weddings, brands & celebrations across North Carolina</p>
+          </article>
+        ))}
+      </div>
+
+      <footer class="controls">
+        <button class="control previous" type="button" aria-label="Previous slide">←</button>
+        <div class="progress" aria-label="Slide progress">
+          {slides.map((_, index) => <button type="button" class={index === 0 ? 'active' : ''} data-go={index} aria-label={`Go to slide ${index + 1}`}><span></span></button>)}
+        </div>
+        <button class="control pause" type="button" aria-label="Pause slideshow" aria-pressed="false"><span class="pause-icon">Ⅱ</span><span class="play-icon">▶</span></button>
+        <button class="control next" type="button" aria-label="Next slide">→</button>
+      </footer>
+    </main>
+
+    <script>
+      const body = document.body;
+      const slides = [...document.querySelectorAll<HTMLElement>('[data-slide]')];
+      const dots = [...document.querySelectorAll<HTMLButtonElement>('[data-go]')];
+      const pauseButton = document.querySelector<HTMLButtonElement>('.pause');
+      const duration = Number(body.dataset.duration) || 8500;
+      let current = 0;
+      let paused = false;
+      let timer: number;
+
+      function show(index: number) {
+        current = (index + slides.length) % slides.length;
+        slides.forEach((slide, i) => slide.setAttribute('aria-hidden', String(i !== current)));
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+        restart();
+      }
+
+      function restart() {
+        window.clearTimeout(timer);
+        if (!paused) timer = window.setTimeout(() => show(current + 1), duration);
+      }
+
+      function togglePause() {
+        paused = !paused;
+        body.classList.toggle('is-paused', paused);
+        pauseButton?.setAttribute('aria-pressed', String(paused));
+        if (pauseButton) pauseButton.setAttribute('aria-label', paused ? 'Play slideshow' : 'Pause slideshow');
+        restart();
+      }
+
+      document.querySelector('.previous')?.addEventListener('click', () => show(current - 1));
+      document.querySelector('.next')?.addEventListener('click', () => show(current + 1));
+      pauseButton?.addEventListener('click', togglePause);
+      dots.forEach((dot, index) => dot.addEventListener('click', () => show(index)));
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowRight') show(current + 1);
+        if (event.key === 'ArrowLeft') show(current - 1);
+        if (event.key === ' ') { event.preventDefault(); togglePause(); }
+      });
+      document.addEventListener('visibilitychange', () => document.hidden ? window.clearTimeout(timer) : restart());
+      restart();
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import url('https://fonts.googleapis.com/css2?family=Futura:wght@400;500;700&family=Montserrat:wght@500;600;700;800;900&family=Yellowtail&display=swap');
+
+  :root {
+    --red: #fd5b5f;
+    --plum: #202945;
+    --blue: #2ca8f8;
+    --white: #f6f7f8;
+    --ink: #151922;
+    --script: 'Hello Paris', 'Yellowtail', cursive;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--plum); }
+  button, a { font: inherit; }
+  button { color: inherit; }
+  a { color: inherit; text-decoration: none; }
+  .show { position: relative; width: 100%; height: 100%; isolation: isolate; color: var(--white); }
+  .show::after { content: ''; position: fixed; inset: 0; z-index: 20; pointer-events: none; opacity: .045; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .show-header { position: fixed; z-index: 30; inset: 0 0 auto; height: 92px; padding: 0 clamp(1.5rem, 4vw, 5rem); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,.3); }
+  .logo { font-size: clamp(1.25rem, 2vw, 2rem); font-weight: 900; letter-spacing: -.1em; }
+  .logo span { color: var(--red); }
+  .book { display: inline-flex; align-items: center; justify-content: center; gap: 1.1rem; background: var(--red); color: white; border-radius: 999px; padding: 1rem 1.45rem; text-transform: uppercase; font-size: .72rem; font-weight: 900; letter-spacing: .09em; box-shadow: 0 10px 35px rgba(0,0,0,.16); transition: transform .2s ease, background .2s ease; }
+  .book:hover, .book:focus-visible { transform: translateY(-3px); background: #ef474e; }
+  .slides, .slide { position: absolute; inset: 0; }
+  .slide { overflow: hidden; background: var(--plum); opacity: 0; visibility: hidden; transition: opacity .65s ease, visibility .65s step-end; }
+  .slide[aria-hidden='false'] { opacity: 1; visibility: visible; transition: opacity .65s ease; z-index: 2; }
+  .photo { position: absolute; inset: 0; background-image: var(--image); background-size: cover; background-position: var(--position); filter: var(--filter, none); transform: scale(1.035); transition: transform 9s linear; }
+  .slide[aria-hidden='false'] .photo { transform: scale(1); }
+  .wash { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(17,20,30,.96) 0%, rgba(17,20,30,.88) 30%, rgba(17,20,30,.3) 51%, rgba(17,20,30,0) 68%); }
+  .shape { position: absolute; width: 47vw; height: 47vw; min-width: 560px; min-height: 560px; right: -17vw; bottom: -27vw; border-radius: 50%; background: var(--red); mix-blend-mode: multiply; opacity: .76; }
+  .copy { position: absolute; z-index: 3; left: clamp(1.5rem, 6vw, 8rem); top: 50%; width: min(700px, 52vw); transform: translateY(-44%); }
+  .eyebrow { display: flex; align-items: center; gap: 1rem; margin: 0 0 1.2rem; font-size: clamp(.62rem, .85vw, .84rem); line-height: 1.4; font-weight: 800; text-transform: uppercase; letter-spacing: .17em; }
+  .eyebrow span { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border: 1px solid currentColor; border-radius: 50%; font-size: .62rem; }
+  h1 { margin: 0; max-width: 900px; font-family: 'Futura', 'Montserrat', sans-serif; font-size: clamp(4rem, 8.6vw, 10.5rem); line-height: .82; letter-spacing: -.075em; text-transform: uppercase; }
+  .script { position: relative; z-index: 2; width: max-content; max-width: 100%; margin: .35rem 0 1.2rem clamp(1rem, 6vw, 6rem); font-family: var(--script); font-size: clamp(2.2rem, 4.25vw, 5.25rem); line-height: .95; color: var(--red); transform: rotate(-3deg); }
+  .description { max-width: 540px; margin: 0 0 1.6rem; font-size: clamp(.9rem, 1.2vw, 1.2rem); line-height: 1.65; font-weight: 500; }
+  .service-note { position: absolute; right: clamp(1.5rem, 4vw, 5rem); bottom: 2rem; z-index: 3; margin: 0; font-size: .58rem; font-weight: 800; text-transform: uppercase; letter-spacing: .14em; }
+  .controls { position: fixed; z-index: 30; left: clamp(1.5rem, 4vw, 5rem); right: clamp(1.5rem, 4vw, 5rem); bottom: 1.4rem; display: flex; align-items: center; width: min(560px, 46vw); gap: .7rem; }
+  .control, .progress button { border: 0; background: transparent; cursor: pointer; }
+  .control { display: grid; place-items: center; flex: none; width: 38px; height: 38px; border: 1px solid rgba(255,255,255,.56); border-radius: 50%; font-size: 1rem; }
+  .progress { display: flex; flex: 1; align-items: center; gap: .5rem; }
+  .progress button { flex: 1; height: 24px; padding: 10px 0; }
+  .progress button span { display: block; height: 2px; background: rgba(255,255,255,.4); overflow: hidden; }
+  .progress button span::after { content: ''; display: block; width: 100%; height: 100%; background: white; transform: scaleX(0); transform-origin: left; }
+  .progress button.active span::after { animation: fill var(--duration, 8500ms) linear forwards; }
+  .is-paused .progress button.active span::after { animation-play-state: paused; }
+  .play-icon { display: none; font-size: .7rem; }
+  .is-paused .play-icon { display: inline; }
+  .is-paused .pause-icon { display: none; }
+  .slide-light { color: var(--ink); background: var(--white); }
+  .slide-light .wash { background: linear-gradient(90deg, rgba(246,247,248,.72) 0%, rgba(246,247,248,.44) 25%, rgba(246,247,248,.06) 42%, rgba(246,247,248,0) 54%); }
+  .slide-light .shape { background: var(--blue); opacity: .2; mix-blend-mode: multiply; }
+  .slide-light .control { border-color: rgba(21,25,34,.45); }
+  .slide-red .shape { background: var(--blue); opacity: .52; }
+  .slide-blue .shape { background: var(--blue); opacity: .82; }
+  .slide-final .copy { width: min(810px, 58vw); }
+
+  @media (orientation: portrait) {
+    .show-header { height: 78px; }
+    .slide { background: var(--plum); }
+    .photo { inset: 0 0 auto; height: 56%; background-position: var(--position); }
+    .wash, .slide-light .wash { background: linear-gradient(0deg, var(--plum) 0%, var(--plum) 46%, rgba(32,41,69,.72) 55%, rgba(32,41,69,0) 69%); }
+    .slide-light { color: var(--white); }
+    .shape { width: 70vw; height: 70vw; right: -33vw; bottom: -28vw; opacity: .7; }
+    .copy, .slide-final .copy { top: auto; left: 7vw; right: 7vw; bottom: 10.5vh; width: auto; transform: none; }
+    h1 { font-size: clamp(3.6rem, 13vw, 8rem); }
+    .script { margin-left: 3vw; font-size: clamp(2.35rem, 8vw, 5rem); }
+    .description { max-width: 700px; font-size: clamp(.92rem, 2.5vw, 1.4rem); }
+    .service-note { display: none; }
+    .controls { left: 7vw; bottom: 2rem; width: 86vw; }
+  }
+
+  @media (max-width: 620px) {
+    .show-header { height: 68px; padding: 0 1.1rem; }
+    .book-header { padding: .72rem 1rem; font-size: .62rem; }
+    .copy, .slide-final .copy { left: 1.4rem; right: 1.4rem; bottom: 7.2rem; }
+    .eyebrow { gap: .7rem; margin-bottom: .8rem; font-size: .55rem; }
+    .eyebrow span { width: 2rem; height: 2rem; }
+    h1 { font-size: clamp(3.25rem, 16vw, 5.5rem); }
+    .script { font-size: clamp(2rem, 10vw, 3.7rem); }
+    .description { margin-bottom: 1.1rem; font-size: .82rem; line-height: 1.5; }
+    .book-main { padding: .8rem 1.15rem; font-size: .62rem; }
+    .controls { left: 1.1rem; right: 1.1rem; bottom: 1.1rem; width: auto; }
+    .previous, .next { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide, .photo { transition: none; }
+    .progress button.active span::after { animation: none; transform: scaleX(1); }
+  }
+</style>
+
+<style define:vars={{ duration: `${slideDuration}ms` }}></style>
