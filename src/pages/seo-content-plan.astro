@@ -1,0 +1,376 @@
+---
+import '../styles/global.css';
+
+const moneyPages = [
+  { priority: '01', keyword: 'backdrop photo booth', volume: '4,400', cpc: '$0.46', action: 'Move the existing Backdrops page from #10 toward the top five', type: 'Quick win', accent: 'coral' },
+  { priority: '02', keyword: 'photo booth rental Charlotte NC', volume: '720', cpc: '$2.46', action: 'Rebuild Charlotte; the homepage currently ranks #19', type: 'Location page', accent: 'yellow' },
+  { priority: '03', keyword: 'photo booth rental Raleigh NC', volume: '140', cpc: '$2.57', action: 'Consolidate three competing URLs and transfer authority', type: 'Consolidation', accent: 'blue' },
+  { priority: '04', keyword: 'how much is a photo booth', volume: '1,000', cpc: '$0.67', action: 'Publish a cost guide; the homepage currently ranks #44', type: 'New guide', accent: 'cream' },
+  { priority: '05', keyword: 'photo booth for wedding reception', volume: '880', cpc: '$1.48', action: 'Build a focused wedding hub from the homepage’s #35 foothold', type: 'Service hub', accent: 'coral' },
+  { priority: '06', keyword: 'event photo booth', volume: '1,600', cpc: '$2.16', action: 'Create an event and private-party hub from position #58', type: 'Service hub', accent: 'blue' },
+  { priority: '07', keyword: 'glam booth photo booth', volume: '260', cpc: '$1.55', action: 'Protect and expand the existing page ranking #9', type: 'Existing winner', accent: 'yellow' },
+  { priority: '08', keyword: 'corporate event photo booth', volume: '320', cpc: '$3.00', action: 'Create a corporate hub; the homepage ranks #49', type: 'Service hub', accent: 'cream' },
+  { priority: '09', keyword: '360 booth + local intent', volume: '9,900*', cpc: '$1.31', action: 'Consolidate two URLs, then rebuild the canonical 360 page', type: 'Consolidation', accent: 'coral' },
+  { priority: '10', keyword: 'roamer photo booth', volume: '170', cpc: '$1.14', action: 'Preserve the dedicated page already ranking #7', type: 'Protect', accent: 'blue' },
+];
+
+const demand = [
+  { label: 'Homepage', volume: '74.2%', width: 100, color: 'var(--coral)' },
+  { label: 'Winston-Salem', volume: '15.8%', width: 21, color: 'var(--yellow)' },
+  { label: 'Glam Booth', volume: '5.2%', width: 7, color: 'var(--blue)' },
+  { label: 'Raleigh venues', volume: '3.5%', width: 5, color: 'var(--coral)' },
+  { label: 'Roamer Booth', volume: '1.3%', width: 2, color: 'var(--yellow)' },
+];
+
+const contentIdeas = [
+  {
+    number: '01', type: 'Technical cleanup', priority: 'Do first',
+    title: 'Consolidate the Raleigh Pages',
+    total: '3 URLs',
+    keywords: ['Homepage · ranks #5–11', '/raleigh-photo-booth · ranks #27–38', '/locations/raleigh · ranks #28–86'],
+    brief: 'Keep /raleigh-photo-booth as the canonical local page, 301 redirect /locations/raleigh, and strengthen internal links before reducing Raleigh language on the homepage.',
+    links: 'Outcome: One clear Raleigh destination',
+    tone: 'coral'
+  },
+  {
+    number: '02', type: 'Technical cleanup', priority: 'Do first',
+    title: 'Consolidate the 360 Pages',
+    total: '2 URLs',
+    keywords: ['/360-photo-booth · 9 weak rankings', '/360-photo-booths · 0 rankings', 'Homepage owns both local 360 terms'],
+    brief: 'Redirect the unused plural URL to /360-photo-booth, then rebuild the canonical page around rental intent, local availability, videos, space requirements and pricing.',
+    links: 'Outcome: One authoritative 360 page',
+    tone: 'yellow'
+  },
+  {
+    number: '03', type: 'Existing page', priority: 'Best quick win',
+    title: 'Upgrade the Backdrop Gallery',
+    total: '#10',
+    keywords: ['backdrop photo booth · 4,400 · #10', 'black photo booth backdrop · #11', 'photo booth black backdrop · #22'],
+    brief: 'Improve the existing page’s title, introduction, gallery categories, descriptive copy, FAQs and paths into Glam, Pro and wedding bookings.',
+    links: 'Keep: /photo-booth-backdrops',
+    tone: 'blue'
+  },
+  {
+    number: '04', type: 'Location page', priority: 'Top local gap',
+    title: 'Rebuild the Charlotte Page',
+    total: '#19',
+    keywords: ['Charlotte rental · 720 searches', 'Homepage currently ranks #19', 'Charlotte page · 0 ranking keywords'],
+    brief: 'Add Charlotte event galleries, testimonials, venues, service areas, booth options and FAQs, then link prominently from the homepage.',
+    links: 'Build: /charlotte-photo-booth',
+    tone: 'cream'
+  },
+  {
+    number: '05', type: 'Conversion guide', priority: 'First new content',
+    title: 'How Much Does a Photo Booth Cost?',
+    total: '1,000+',
+    keywords: ['how much is a photo booth · 1,000 · #44', 'photo booth rental cost · 2,400', 'wedding booth cost · 390'],
+    brief: 'Explain hours, booth formats, prints, staffing, travel, graphics and sharing, then connect directly to packages and availability.',
+    links: 'Create: Cost + packages guide',
+    tone: 'coral'
+  },
+  {
+    number: '06', type: 'Service hub', priority: 'Commercial gap',
+    title: 'Build the Wedding Hub',
+    total: '#35',
+    keywords: ['photo booth for wedding reception · 880 · #35', 'wedding photo booth rental · 8,100', 'wedding ideas · 590'],
+    brief: 'Give couples one useful destination covering booth selection, timing, placement, prints, backdrops, guest books, pricing and real galleries.',
+    links: 'Create: Wedding Photo Booth Rentals',
+    tone: 'yellow'
+  },
+  {
+    number: '07', type: 'Service hub', priority: 'Large gap',
+    title: 'Build the Event & Party Hub',
+    total: '1,600',
+    keywords: ['event photo booth · 1,600 · #58', 'photo booth for parties · 1,300 · #70', 'party booth rental · #69'],
+    brief: 'Create a broad but commercial destination for birthdays, reunions, anniversaries, holiday parties, galas and private celebrations.',
+    links: 'Create: Event + Private Party Photo Booths',
+    tone: 'blue'
+  },
+  {
+    number: '08', type: 'Service hub', priority: 'Highest CPC',
+    title: 'Build the Corporate Hub',
+    total: '$3 CPC',
+    keywords: ['corporate event photo booth · 320 · #49', 'brand activation photo booth · 110', 'business photo booth · 320 · #89'],
+    brief: 'Show branded overlays, lead capture, instant sharing, live galleries, conferences, product launches and measurable engagement.',
+    links: 'Create: Corporate + Brand Activations',
+    tone: 'cream'
+  },
+  {
+    number: '09', type: 'Existing winner', priority: 'Protect',
+    title: 'Expand Glam Without Disrupting It',
+    total: '7 top-10s',
+    keywords: ['black and white Kardashians · #3', 'black and white Glam · #5', 'glam booth photo booth · #9'],
+    brief: 'Preserve the URL and established topic. Add richer wedding and luxury-event proof, stronger calls to action and links to local pages.',
+    links: 'Keep: /glam-booth-black-and-white-photo-booth',
+    tone: 'coral'
+  },
+  {
+    number: '10', type: 'Index cleanup', priority: 'Technical hygiene',
+    title: 'Remove Attachment-Page Clutter',
+    total: '8+ URLs',
+    keywords: ['/meet-us/mer-webpic-2', '/book-us/couple-mustache', '/whyzimzoom/touchscreen-user'],
+    brief: 'Redirect WordPress image attachment pages to their parent content or prevent attachment pages from being indexed.',
+    links: 'Outcome: A cleaner, more focused index',
+    tone: 'yellow'
+  },
+];
+
+const locations = [
+  { rank: '01', city: 'Charlotte', volume: 720, width: 100, note: 'Homepage #19; city page has no rankings' },
+  { rank: '02', city: 'Raleigh', volume: 140, width: 19, note: 'Homepage #5–8; three URLs compete' },
+  { rank: '03', city: 'Greensboro', volume: 50, width: 7, note: 'Build local proof' },
+  { rank: '04', city: 'Wilmington', volume: 50, width: 7, note: 'Homepage currently ranks #24' },
+  { rank: '05', city: 'Asheville', volume: 40, width: 6, note: 'Venue-led opportunity' },
+  { rank: '06', city: 'Durham', volume: 20, width: 3, note: 'Homepage #24; dedicated page needs focus' },
+  { rank: '07', city: 'Winston-Salem', volume: 20, width: 3, note: 'Near-me anomaly; clarify North Carolina' },
+];
+
+const roadmap = [
+  { phase: 'Phase 01', timing: 'Weeks 1–4', title: 'Fix the map', color: 'coral', tasks: ['Consolidate Raleigh URLs', 'Consolidate 360 URLs', 'Redirect attachment pages', 'Establish conversion baselines'] },
+  { phase: 'Phase 02', timing: 'Weeks 5–8', title: 'Transfer authority', color: 'yellow', tasks: ['Rebuild Charlotte page', 'Upgrade Backdrops page', 'Strengthen canonical Raleigh page', 'Rewrite canonical 360 page'] },
+  { phase: 'Phase 03', timing: 'Weeks 9–12', title: 'Fill the gaps', color: 'blue', tasks: ['Publish cost + packages guide', 'Launch wedding hub', 'Launch event + party hub', 'Launch corporate hub'] },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Keyword-led organic search and content growth plan for ZimZoom Photo Booth." />
+    <link rel="icon" href="/images/seal.png" />
+    <title>ZimZoom Organic Search Growth Plan</title>
+  </head>
+  <body class="report-body">
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="report-header">
+      <a class="report-mark" href="#top" aria-label="ZimZoom report home">ZIM<span>ZOOM</span></a>
+      <nav aria-label="Report navigation">
+        <a href="#opportunity">Opportunity</a>
+        <a href="#priorities">Priorities</a>
+        <a href="#content">Content</a>
+        <a href="#roadmap">Roadmap</a>
+      </nav>
+      <button class="share-button" id="share-report" type="button">Copy report link <span>↗</span></button>
+    </header>
+
+    <main id="top">
+      <section class="report-hero">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-kicker reveal-now"><span>Validated organic search strategy</span><b>3 Keywords Everywhere exports · July 2026</b></div>
+        <div class="hero-title reveal-now">
+          <p>A keyword-led growth plan for</p>
+          <h1>Search.<br/><i>Show up.</i><br/>Book.</h1>
+        </div>
+        <div class="hero-aside reveal-now">
+          <p>Fix competing URLs, transfer homepage authority into focused pages, and publish only where the ranking data proves a real gap.</p>
+          <a href="#opportunity">See the opportunity <span>↓</span></a>
+        </div>
+        <div class="hero-sticker reveal-now" aria-label="Three data sets validated"><b>3</b><span>data sets<br/>validated</span></div>
+        <div class="hero-strip">
+          <span>North Carolina</span><span>Wedding</span><span>Corporate</span><span>360</span><span>Local SEO</span><span>Pricing</span>
+        </div>
+      </section>
+
+      <section class="executive section-pad" id="opportunity">
+        <div class="section-label">01 / THE OPPORTUNITY</div>
+        <div class="executive-copy">
+          <p class="overline">The validated strategic headline</p>
+          <h2>Fix the <i>site map</i> first. Then publish.</h2>
+          <p class="lede">ZimZoom has demand and existing authority, but too much of it is concentrated on the homepage while duplicate and underpowered pages compete for the same searches. The fastest path is consolidation, page upgrades and deliberate authority transfer.</p>
+        </div>
+        <div class="metric-grid">
+          <article class="metric metric-coral"><span>Authority concentration</span><b>74%</b><p>estimated traffic on homepage</p></article>
+          <article class="metric metric-yellow"><span>Confirmed overlap</span><b>3</b><p>URLs competing for Raleigh</p></article>
+          <article class="metric metric-blue"><span>Best existing quick win</span><b>#10</b><p>backdrop photo booth</p></article>
+          <article class="metric metric-dark"><span>Clearest local gap</span><b>#19</b><p>Charlotte ranking belongs to homepage</p></article>
+        </div>
+      </section>
+
+      <section class="demand-section section-pad">
+        <div class="section-label light">02 / WHERE AUTHORITY LIVES</div>
+        <div class="demand-intro">
+          <h2>The homepage<br/>does <i>too much.</i></h2>
+          <p>Share of Keywords Everywhere’s estimated organic traffic across the five URLs reporting any traffic. These are directional vendor estimates—not analytics sessions.</p>
+        </div>
+        <div class="demand-chart" role="img" aria-label="Estimated organic traffic share by ZimZoom page">
+          {demand.map((item) => (
+            <div class="demand-row">
+              <div class="demand-label"><span>{item.label}</span><b>{item.volume}</b></div>
+              <div class="demand-track"><span style={`--bar-width:${item.width}%;--bar-color:${item.color}`}></span></div>
+            </div>
+          ))}
+        </div>
+        <aside class="strategy-note">
+          <span>THE DIAGNOSIS</span>
+          <p>Only five of 40 reported URLs receive estimated traffic. The homepage ranks for Raleigh, Charlotte, Durham, Wilmington, wedding, event and local 360 terms that should eventually belong to focused destination pages.</p>
+        </aside>
+      </section>
+
+      <section class="priority-section section-pad" id="priorities">
+        <div class="section-label">03 / COMMERCIAL PRIORITIES</div>
+        <div class="priority-heading">
+          <h2>Moves backed by<br/><i>real rankings.</i></h2>
+          <p>Priorities now combine market demand with ZimZoom’s current position and exact ranking URL. Existing footholds come before speculative national targets.</p>
+        </div>
+        <div class="priority-table">
+          <div class="table-head"><span>Rank</span><span>Keyword</span><span>Monthly volume</span><span>CPC</span><span>Recommended action</span><span>Format</span></div>
+          {moneyPages.map((item) => (
+            <article class={`table-row ${item.accent}`}>
+              <span class="rank">{item.priority}</span>
+              <h3>{item.keyword}</h3>
+              <b>{item.volume}</b>
+              <b>{item.cpc}</b>
+              <p>{item.action}</p>
+              <em>{item.type}</em>
+            </article>
+          ))}
+        </div>
+        <p class="table-note"><b>*Important:</b> The 9,900 figure is national demand for the generic 360 term, not a current ZimZoom ranking. “Competition” reflects paid advertiser competition, not organic ranking difficulty.</p>
+      </section>
+
+      <section class="content-section section-pad" id="content">
+        <div class="section-label light">04 / VALIDATED ACTION PLAN</div>
+        <div class="content-heading">
+          <h2>Ten moves.<br/><i>One clean system.</i></h2>
+          <p>Four technical fixes and existing-page upgrades come before the first new article. Every move is tied to an exact URL or ranking signal.</p>
+        </div>
+        <div class="content-grid">
+          {contentIdeas.map((idea) => (
+            <article class={`idea-card ${idea.tone}`}>
+              <div class="idea-top"><span>{idea.number} / {idea.type}</span><b>{idea.priority}</b></div>
+              <h3>{idea.title}</h3>
+              <div class="idea-volume"><span>Validated signal</span><b>{idea.total}</b></div>
+              <ul>{idea.keywords.map((keyword) => <li>{keyword}</li>)}</ul>
+              <p>{idea.brief}</p>
+              <footer>{idea.links}</footer>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="location-section section-pad" id="locations">
+        <div class="section-label">05 / LOCAL SEARCH</div>
+        <div class="location-heading">
+          <h2>Charlotte has demand.<br/><i>Raleigh has authority.</i></h2>
+          <p>Charlotte is the clearest local growth gap. Raleigh already ranks strongly through the homepage, so its work must be a staged consolidation—not a blunt rewrite that risks current visibility.</p>
+        </div>
+        <div class="location-chart">
+          {locations.map((location) => (
+            <article>
+              <span>{location.rank}</span>
+              <div><h3>{location.city}</h3><p>{location.note}</p></div>
+              <div class="location-bar"><span style={`--location-width:${location.width}%`}></span></div>
+              <b>{location.volume}<small>/ mo</small></b>
+            </article>
+          ))}
+        </div>
+        <aside class="local-rule"><b>THE LOCAL PAGE RULE</b><p>One canonical page per city. Add real event galleries, testimonials, venues served, travel details and city-specific FAQs. Transfer authority with strong internal links before dialing back homepage language.</p></aside>
+      </section>
+
+      <section class="roadmap-section section-pad" id="roadmap">
+        <div class="section-label">06 / 90-DAY ROADMAP</div>
+        <div class="roadmap-heading">
+          <h2>Fix. Transfer.<br/><i>Then expand.</i></h2>
+          <p>The sequence protects current rankings while creating focused pages that can eventually take over from the homepage.</p>
+        </div>
+        <div class="roadmap-grid">
+          {roadmap.map((phase) => (
+            <article class={phase.color}>
+              <div><span>{phase.phase}</span><b>{phase.timing}</b></div>
+              <h3>{phase.title}</h3>
+              <ol>{phase.tasks.map((task, index) => <li><span>0{index + 1}</span>{task}</li>)}</ol>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="measure-section section-pad">
+        <div class="section-label light">07 / MEASUREMENT</div>
+        <div class="measure-copy">
+          <h2>Traffic is nice.<br/><i>Inquiries are the goal.</i></h2>
+          <p>Review performance monthly and make decisions quarterly. Rankings tell us whether pages are visible; qualified inquiries tell us whether the strategy is working.</p>
+        </div>
+        <div class="measure-list">
+          <article><span>01</span><h3>Visibility</h3><p>Non-brand clicks, impressions and ranking keywords by cluster.</p></article>
+          <article><span>02</span><h3>Engagement</h3><p>Landing-page engagement, gallery clicks and package-page visits.</p></article>
+          <article><span>03</span><h3>Conversion</h3><p>Availability checks, form submissions and calls by landing page.</p></article>
+          <article><span>04</span><h3>Revenue</h3><p>Qualified leads and booked events attributed to organic search.</p></article>
+        </div>
+      </section>
+
+      <section class="methodology section-pad">
+        <div class="section-label">08 / NOTES</div>
+        <div>
+          <h2>Methodology</h2>
+          <p>Based on three Keywords Everywhere exports from July 16, 2026: 59 seed keywords with U.S. search volume, 147 unique domain-ranking keywords, and 40 reported top pages with URL-level keyword mappings.</p>
+          <p>Search volume and estimated traffic are vendor estimates and should be used directionally. Priorities combine demand, current position, exact ranking URL, commercial relevance and the risk of competing pages. Google Search Console and booking attribution remain the source of truth for real clicks and conversions.</p>
+        </div>
+        <div class="method-stamp"><span>Prepared for</span><b>ZIM<br/>ZOOM</b><span>July 2026</span></div>
+      </section>
+    </main>
+
+    <footer class="report-footer">
+      <div class="report-mark">ZIM<span>ZOOM</span></div>
+      <p>Organic Search & Content Growth Plan</p>
+      <a href="#top">Back to top ↑</a>
+    </footer>
+
+    <script>
+      const shareButton = document.querySelector('#share-report');
+      shareButton?.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          const original = shareButton.innerHTML;
+          shareButton.innerHTML = 'Link copied <span>✓</span>';
+          setTimeout(() => { shareButton.innerHTML = original; }, 1800);
+        } catch {
+          window.prompt('Copy this report link:', window.location.href);
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  :global(html) { scroll-padding-top: 74px; }
+  :global(body.report-body) { background:#f4f0e8; color:#151515; }
+  .report-header { position:sticky; top:0; z-index:30; height:72px; padding:0 3vw; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; background:rgba(21,21,21,.95); color:white; backdrop-filter:blur(16px); border-bottom:1px solid rgba(255,255,255,.18); }
+  .report-mark { font-family:'Archivo Black',sans-serif; letter-spacing:-.09em; font-size:1.55rem; width:max-content; }.report-mark span { color:var(--coral); }
+  .report-header nav { display:flex; gap:2rem; }.report-header nav a { font-size:.64rem; text-transform:uppercase; letter-spacing:.14em; font-weight:800; opacity:.72; transition:.2s; }.report-header nav a:hover { opacity:1; color:var(--yellow); }
+  .share-button { justify-self:end; border:1px solid rgba(255,255,255,.45); color:white; background:transparent; border-radius:999px; padding:.72rem 1rem; font-size:.63rem; font-weight:800; text-transform:uppercase; letter-spacing:.09em; cursor:pointer; transition:.2s; }.share-button:hover { background:var(--coral); border-color:var(--coral); transform:translateY(-2px); }.share-button span { margin-left:.5rem; }
+  .report-hero { min-height:780px; height:calc(100svh - 72px); position:relative; overflow:hidden; background:var(--ink); color:white; padding:6vh 5vw 7rem; display:grid; grid-template-columns:1fr 1.7fr .8fr; grid-template-rows:auto 1fr auto; gap:2rem 4vw; }
+  .hero-grid { position:absolute; inset:0; opacity:.13; background-image:linear-gradient(rgba(255,255,255,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px); background-size:80px 80px; mask-image:linear-gradient(to bottom,black,transparent 85%); }
+  .report-hero:before { content:''; position:absolute; width:42vw; aspect-ratio:1; border-radius:50%; background:var(--coral); filter:blur(0); right:-16vw; top:-22vw; opacity:.94; }
+  .report-hero:after { content:''; position:absolute; width:24vw; aspect-ratio:1; border-radius:50%; background:var(--blue); left:52%; bottom:-16vw; }
+  .hero-kicker,.hero-title,.hero-aside,.hero-sticker { position:relative; z-index:2; }
+  .hero-kicker { grid-column:1/-1; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,.32); padding-bottom:1rem; }.hero-kicker span,.hero-kicker b { text-transform:uppercase; letter-spacing:.14em; font-size:.64rem; }.hero-kicker b { color:var(--yellow); }
+  .hero-title { grid-column:1/3; align-self:center; }.hero-title>p { font-size:.8rem; text-transform:uppercase; letter-spacing:.16em; font-weight:800; margin:0 0 1.5rem; }.hero-title h1 { font-family:'Archivo Black'; font-size:clamp(5.2rem,11vw,12rem); line-height:.72; letter-spacing:-.085em; text-transform:uppercase; margin:0; }.hero-title h1 i { font-family:'Yellowtail'; text-transform:none; letter-spacing:-.04em; color:var(--yellow); font-weight:400; display:inline-block; transform:rotate(-4deg) translateX(5vw); }
+  .hero-aside { grid-column:3; align-self:end; padding-bottom:2rem; }.hero-aside p { font-size:1.05rem; line-height:1.65; color:#d4d4d4; }.hero-aside a { margin-top:1.6rem; display:flex; justify-content:space-between; border-bottom:2px solid white; padding-bottom:.6rem; text-transform:uppercase; letter-spacing:.12em; font-size:.66rem; font-weight:800; }
+  .hero-sticker { position:absolute; right:6vw; top:24%; background:var(--yellow); color:var(--ink); width:154px; height:154px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-direction:column; transform:rotate(9deg); box-shadow:12px 12px 0 var(--coral); }.hero-sticker b { font-family:'Archivo Black'; font-size:3.7rem; letter-spacing:-.08em; line-height:.8; }.hero-sticker span { font-size:.57rem; line-height:1.3; text-align:center; text-transform:uppercase; letter-spacing:.12em; font-weight:800; margin-top:.75rem; }
+  .hero-strip { position:absolute; z-index:4; bottom:0; left:0; right:0; min-height:62px; display:flex; align-items:center; justify-content:space-around; gap:2rem; background:var(--coral); color:var(--ink); padding:1rem 4vw; }.hero-strip span { font-family:'Archivo Black'; text-transform:uppercase; font-size:.7rem; letter-spacing:.08em; }.hero-strip span:before { content:'✦'; margin-right:1.4rem; color:white; }
+  .reveal-now { animation:report-in .8s cubic-bezier(.2,.8,.2,1) both; }.hero-title { animation-delay:.08s; }.hero-aside { animation-delay:.2s; }.hero-sticker { animation-delay:.28s; }
+  .section-pad { padding:8rem 5vw; }.section-label { font-size:.63rem; letter-spacing:.14em; text-transform:uppercase; font-weight:800; border-top:2px solid var(--ink); padding-top:.8rem; }.section-label.light { border-color:white; color:white; }
+  .executive { display:grid; grid-template-columns:.55fr 1.45fr; gap:4rem 7vw; }.executive-copy { max-width:1040px; }.overline { text-transform:uppercase; letter-spacing:.14em; font-size:.68rem; font-weight:800; color:var(--coral); }.executive h2,.demand-intro h2,.priority-heading h2,.content-heading h2,.location-heading h2,.roadmap-heading h2,.measure-copy h2 { font-family:'Archivo Black'; font-size:clamp(4rem,7.6vw,9.5rem); line-height:.84; letter-spacing:-.07em; text-transform:uppercase; margin:1rem 0 2rem; }.executive h2 i,.demand-intro h2 i,.priority-heading h2 i,.content-heading h2 i,.location-heading h2 i,.roadmap-heading h2 i,.measure-copy h2 i { font-family:'Yellowtail'; text-transform:none; font-weight:400; color:var(--coral); letter-spacing:-.03em; }.lede { max-width:820px; font-size:1.2rem; line-height:1.75; color:#454545; }
+  .metric-grid { grid-column:1/-1; display:grid; grid-template-columns:repeat(4,1fr); border:2px solid var(--ink); }.metric { padding:2rem; min-height:250px; display:flex; flex-direction:column; border-right:2px solid var(--ink); }.metric:last-child { border:0; }.metric span { text-transform:uppercase; letter-spacing:.12em; font-size:.6rem; font-weight:800; }.metric b { font-family:'Archivo Black'; font-size:clamp(3rem,5.5vw,6.5rem); letter-spacing:-.08em; line-height:1; margin:auto 0 1rem; }.metric p { margin:0; font-size:.78rem; font-weight:800; text-transform:uppercase; }.metric-coral{background:var(--coral)}.metric-yellow{background:var(--yellow)}.metric-blue{background:var(--blue)}.metric-dark{background:var(--ink);color:white}
+  .demand-section { background:var(--ink); color:white; display:grid; grid-template-columns:.7fr 1.3fr; gap:4rem 7vw; }.demand-intro h2 { color:white; }.demand-intro p { max-width:540px; color:#aaa; line-height:1.7; }.demand-chart { grid-column:1/-1; }.demand-row { display:grid; grid-template-columns:260px 1fr; align-items:center; padding:1rem 0; border-top:1px solid #444; }.demand-label { display:flex; justify-content:space-between; align-items:baseline; padding-right:2rem; }.demand-label span { font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; font-weight:800; }.demand-label b { font-family:'Archivo Black'; font-size:1.65rem; }.demand-track { background:#2c2c2c; height:48px; overflow:hidden; }.demand-track span { display:block; height:100%; width:var(--bar-width); min-width:7px; background:var(--bar-color); transform-origin:left; animation:bar-grow 1.1s cubic-bezier(.2,.8,.2,1) both; }
+  .strategy-note { grid-column:2; margin-top:2rem; border:1px solid #555; padding:2rem; display:grid; grid-template-columns:160px 1fr; gap:2rem; }.strategy-note span { font-size:.62rem; font-weight:800; letter-spacing:.14em; color:var(--yellow); }.strategy-note p { margin:0; font-size:1.2rem; line-height:1.6; }
+  .priority-heading,.content-heading,.location-heading,.roadmap-heading { display:grid; grid-template-columns:1.5fr .5fr; align-items:end; gap:5vw; margin:4rem 0 5rem; }.priority-heading p,.content-heading p,.location-heading p,.roadmap-heading p { line-height:1.7; color:#555; }.priority-table { border:2px solid var(--ink); }.table-head,.table-row { display:grid; grid-template-columns:70px 1.25fr 135px 80px 1fr 120px; gap:1.2rem; align-items:center; }.table-head { padding:.85rem 1.2rem; background:var(--ink); color:white; }.table-head span { font-size:.55rem; text-transform:uppercase; letter-spacing:.1em; font-weight:800; }.table-row { padding:1.25rem 1.2rem; border-bottom:1px solid rgba(21,21,21,.3); transition:.2s; }.table-row:last-child { border:0; }.table-row:hover { transform:translateX(6px); box-shadow:-6px 0 0 var(--coral); }.table-row h3 { font-family:'Archivo Black'; text-transform:uppercase; letter-spacing:-.035em; font-size:1.05rem; margin:0; }.table-row .rank { font-size:.65rem; font-weight:800; }.table-row>b { font-size:.85rem; }.table-row p { font-size:.78rem; line-height:1.4; }.table-row em { justify-self:start; font-style:normal; background:var(--ink); color:white; border-radius:999px; padding:.4rem .65rem; font-size:.52rem; text-transform:uppercase; font-weight:800; }.table-row.coral:hover{background:#ffe1df}.table-row.yellow:hover{background:#fffbd4}.table-row.blue:hover{background:#ddfbfd}.table-row.cream:hover{background:white}.table-note { margin:1.2rem 0 0 auto; max-width:720px; color:#666; font-size:.72rem; line-height:1.6; }
+  .content-section { background:#272727; color:white; }.content-heading p { color:#aaa; }.content-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.2rem; }.idea-card { color:var(--ink); padding:2rem; min-height:600px; display:flex; flex-direction:column; border-radius:2px; transition:transform .25s,box-shadow .25s; }.idea-card:hover { transform:translateY(-7px) rotate(-.35deg); box-shadow:12px 12px 0 rgba(255,255,255,.15); }.idea-card.coral{background:var(--coral)}.idea-card.yellow{background:var(--yellow)}.idea-card.blue{background:var(--blue)}.idea-card.cream{background:var(--paper)}.idea-top { display:flex; justify-content:space-between; padding-bottom:1rem; border-bottom:1px solid rgba(21,21,21,.45); }.idea-top span,.idea-top b { font-size:.58rem; text-transform:uppercase; letter-spacing:.1em; }.idea-card h3 { font-family:'Archivo Black'; text-transform:uppercase; letter-spacing:-.05em; line-height:.94; font-size:clamp(2rem,3vw,3.7rem); margin:2rem 0; max-width:680px; }.idea-volume { display:flex; justify-content:space-between; align-items:end; margin-bottom:1rem; }.idea-volume span { font-size:.58rem; text-transform:uppercase; letter-spacing:.1em; max-width:120px; }.idea-volume b { font-family:'Archivo Black'; font-size:2.3rem; letter-spacing:-.06em; }.idea-card ul { list-style:none; padding:1rem 0; margin:0; border-top:2px solid var(--ink); border-bottom:1px solid rgba(21,21,21,.4); }.idea-card li { font-size:.75rem; padding:.35rem 0; font-weight:700; }.idea-card>p { line-height:1.65; font-size:.88rem; margin:1.4rem 0; }.idea-card footer { margin-top:auto; padding-top:1rem; border-top:1px solid rgba(21,21,21,.4); font-size:.58rem; text-transform:uppercase; letter-spacing:.08em; font-weight:800; }
+  .location-section { background:var(--yellow); }.location-heading h2 i { color:var(--coral); }.location-chart { border-top:2px solid var(--ink); }.location-chart article { display:grid; grid-template-columns:60px 1fr 1.2fr 100px; align-items:center; gap:2rem; min-height:110px; border-bottom:2px solid var(--ink); }.location-chart article>span { font-size:.6rem; font-weight:800; }.location-chart h3 { font-family:'Archivo Black'; text-transform:uppercase; letter-spacing:-.05em; font-size:clamp(1.8rem,3vw,3.8rem); margin:0; }.location-chart p { margin:.2rem 0 0; font-size:.67rem; text-transform:uppercase; letter-spacing:.08em; }.location-bar { background:rgba(21,21,21,.13); height:22px; }.location-bar span { display:block; height:100%; width:var(--location-width); min-width:9px; background:var(--coral); }.location-chart article>b { font-family:'Archivo Black'; font-size:2rem; letter-spacing:-.05em; }.location-chart small { font-family:'Manrope'; font-size:.55rem; letter-spacing:.05em; margin-left:.25rem; }.local-rule { margin:4rem 0 0 auto; max-width:900px; display:grid; grid-template-columns:180px 1fr; padding:2rem; border:2px solid var(--ink); background:rgba(255,255,255,.3); }.local-rule b { font-size:.65rem; letter-spacing:.12em; }.local-rule p { margin:0; line-height:1.7; }
+  .roadmap-section { background:var(--paper); }.roadmap-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }.roadmap-grid>article { min-height:520px; padding:2rem; display:flex; flex-direction:column; border:2px solid var(--ink); }.roadmap-grid article.coral{background:var(--coral)}.roadmap-grid article.yellow{background:var(--yellow)}.roadmap-grid article.blue{background:var(--blue)}.roadmap-grid article>div { display:flex; justify-content:space-between; text-transform:uppercase; letter-spacing:.1em; font-size:.6rem; }.roadmap-grid h3 { font-family:'Archivo Black'; font-size:clamp(2.6rem,4vw,5rem); line-height:.88; letter-spacing:-.06em; text-transform:uppercase; margin:4rem 0 3rem; }.roadmap-grid ol { list-style:none; padding:0; margin:auto 0 0; border-top:2px solid var(--ink); }.roadmap-grid li { display:grid; grid-template-columns:36px 1fr; padding:1rem 0; border-bottom:1px solid rgba(21,21,21,.4); font-size:.78rem; font-weight:700; }.roadmap-grid li span { font-size:.58rem; }
+  .measure-section { background:var(--ink); color:white; display:grid; grid-template-columns:.8fr 1.2fr; gap:4rem 7vw; }.measure-copy h2 { color:white; }.measure-copy p { color:#aaa; line-height:1.7; max-width:650px; }.measure-list { grid-column:1/-1; display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid #555; }.measure-list article { padding:2rem; min-height:250px; border-right:1px solid #555; }.measure-list article:last-child { border:0; }.measure-list span { display:block; color:var(--coral); font-size:.65rem; font-weight:800; }.measure-list h3 { font-family:'Archivo Black'; text-transform:uppercase; font-size:1.5rem; margin:4rem 0 1rem; }.measure-list p { color:#aaa; font-size:.78rem; line-height:1.6; }
+  .methodology { display:grid; grid-template-columns:.45fr 1.1fr .45fr; gap:5vw; align-items:start; }.methodology h2 { font-family:'Archivo Black'; text-transform:uppercase; font-size:3rem; letter-spacing:-.05em; margin:0 0 1.5rem; }.methodology p { color:#555; line-height:1.7; }.method-stamp { justify-self:end; width:180px; height:180px; border:2px solid var(--ink); border-radius:50%; display:flex; flex-direction:column; justify-content:center; align-items:center; transform:rotate(7deg); }.method-stamp span { font-size:.54rem; text-transform:uppercase; letter-spacing:.1em; }.method-stamp b { font-family:'Archivo Black'; color:var(--coral); font-size:2.1rem; line-height:.7; text-align:center; margin:.7rem 0 1rem; letter-spacing:-.08em; }
+  .report-footer { min-height:180px; background:var(--coral); padding:3rem 5vw; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; }.report-footer p { text-transform:uppercase; letter-spacing:.12em; font-size:.65rem; font-weight:800; }.report-footer a { justify-self:end; text-transform:uppercase; letter-spacing:.1em; font-size:.62rem; font-weight:800; border-bottom:2px solid; padding-bottom:.4rem; }
+  @keyframes report-in { from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none} }
+  @keyframes bar-grow { from{transform:scaleX(0)}to{transform:scaleX(1)} }
+  @media(max-width:1000px){
+    .report-header { grid-template-columns:1fr auto; }.report-header nav{display:none}.report-hero{grid-template-columns:1fr 1fr}.hero-title{grid-column:1/-1}.hero-aside{grid-column:2}.hero-sticker{right:7vw;top:18%}.executive{grid-template-columns:1fr}.metric-grid{grid-template-columns:1fr 1fr}.metric:nth-child(2){border-right:0}.metric:nth-child(-n+2){border-bottom:2px solid var(--ink)}.priority-heading,.content-heading,.location-heading,.roadmap-heading{grid-template-columns:1fr}.table-head{display:none}.table-row{grid-template-columns:50px 1fr 100px 80px}.table-row p{grid-column:2/4}.table-row em{grid-column:4;grid-row:2}.roadmap-grid{grid-template-columns:1fr}.roadmap-grid>article{min-height:400px}.measure-list{grid-template-columns:1fr 1fr}.measure-list article:nth-child(2){border-right:0}.measure-list article:nth-child(-n+2){border-bottom:1px solid #555}.methodology{grid-template-columns:.5fr 1.5fr}.method-stamp{grid-column:2}
+  }
+  @media(max-width:700px){
+    .report-header{height:62px;padding:0 5vw}.report-mark{font-size:1.25rem}.share-button{font-size:0;width:42px;height:42px;padding:0}.share-button span{font-size:1rem;margin:0}.report-hero{height:auto;min-height:740px;padding:4rem 6vw 6rem;display:block}.hero-kicker b{display:none}.hero-title{margin-top:8rem}.hero-title h1{font-size:clamp(4.2rem,20vw,6rem);line-height:.78}.hero-title h1 i{transform:rotate(-4deg) translateX(8vw)}.hero-aside{margin:3rem 0 0 26%;}.hero-sticker{width:105px;height:105px;right:7vw;top:10rem;box-shadow:7px 7px 0 var(--coral)}.hero-sticker b{font-size:2.5rem}.hero-sticker span{font-size:.44rem}.hero-strip{justify-content:flex-start;overflow:hidden}.hero-strip span:nth-child(n+4){display:none}.section-pad{padding:5.5rem 6vw}.section-label{margin-bottom:3rem}.executive h2,.demand-intro h2,.priority-heading h2,.content-heading h2,.location-heading h2,.roadmap-heading h2,.measure-copy h2{font-size:clamp(3.2rem,15vw,5.5rem)}.lede{font-size:1rem}.metric-grid{grid-template-columns:1fr}.metric{border-right:0!important;border-bottom:2px solid var(--ink)!important;min-height:190px}.metric:last-child{border-bottom:0!important}.demand-section,.measure-section{grid-template-columns:1fr}.demand-row{grid-template-columns:1fr;gap:.7rem}.demand-track{height:32px}.strategy-note{grid-column:1;grid-template-columns:1fr}.content-grid{grid-template-columns:1fr}.idea-card{min-height:550px;padding:1.5rem}.idea-card h3{font-size:2.5rem}.location-chart article{grid-template-columns:34px 1fr 70px;gap:1rem;padding:1rem 0}.location-bar{grid-column:2/4;width:100%}.local-rule{grid-template-columns:1fr;gap:1rem}.measure-list{grid-template-columns:1fr}.measure-list article{border-right:0;border-bottom:1px solid #555!important}.methodology{grid-template-columns:1fr}.method-stamp{grid-column:1;justify-self:start}.report-footer{grid-template-columns:1fr;gap:1.5rem}.report-footer p{margin:0}.report-footer a{justify-self:start}.table-row{grid-template-columns:36px 1fr 70px;padding:1rem .8rem;gap:.8rem}.table-row>b:nth-of-type(2){display:none}.table-row p{grid-column:2/4;margin:.2rem 0}.table-row em{grid-column:2;grid-row:auto}.table-row h3{font-size:.9rem}.roadmap-grid>article{min-height:450px}
+  }
+  @media(prefers-reduced-motion:reduce){.reveal-now,.demand-track span{animation:none}}
+  @media print { .report-header,.grain,.share-button{display:none!important}.report-hero{min-height:650px;height:auto}.section-pad{padding:3rem 4vw}.idea-card,.roadmap-grid>article,.metric{break-inside:avoid}.content-section,.demand-section,.measure-section{print-color-adjust:exact;-webkit-print-color-adjust:exact} }
+</style>
