@@ -11,6 +11,18 @@ const slideDuration = 8500;
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="description" content="Explore ZimZoom photo booth experiences and check availability for your event." />
     <meta name="theme-color" content="#202945" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://zimzoomphotobooth.com/slideshow/" />
+    <meta property="og:title" content="ZimZoom Experiences | More Than a Booth" />
+    <meta property="og:description" content="Explore ZimZoom photo booth experiences for weddings, brand events, campus events, and parties across North Carolina." />
+    <meta property="og:image" content="https://zimzoomphotobooth.com/og/slideshow.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="ZimZoom photo booth experiences in North Carolina" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ZimZoom Experiences | More Than a Booth" />
+    <meta name="twitter:description" content="Explore ZimZoom photo booth experiences across North Carolina." />
+    <meta name="twitter:image" content="https://zimzoomphotobooth.com/og/slideshow.png" />
     <title>ZimZoom Experiences</title>
   </head>
   <body data-duration={slideDuration}>
@@ -23,7 +35,7 @@ const slideDuration = 8500;
       <div class="slides" aria-live="polite">
         {slides.map((slide, index) => (
           <article
-            class={`slide slide-${slide.theme} ${slide.final ? 'slide-final' : ''}`}
+            class={`slide slide-${slide.theme} slide-${slide.layout} ${slide.final ? 'slide-final' : ''}`}
             data-slide={index}
             aria-hidden={index === 0 ? 'false' : 'true'}
           >
@@ -35,6 +47,9 @@ const slideDuration = 8500;
               <h1>{slide.title}</h1>
               <p class="script">{slide.script}</p>
               <p class="description">{slide.description}</p>
+              <ul class="facts" aria-label="Experience details">
+                {slide.facts.map((fact) => <li>{fact}</li>)}
+              </ul>
               <a class="book book-main" href={bookingUrl}>{slide.final ? 'Check your date' : 'See your options'} <span>↗</span></a>
             </div>
             <p class="service-note">Serving weddings, brands & celebrations across North Carolina</p>
@@ -58,7 +73,8 @@ const slideDuration = 8500;
       const dots = [...document.querySelectorAll<HTMLButtonElement>('[data-go]')];
       const pauseButton = document.querySelector<HTMLButtonElement>('.pause');
       const duration = Number(body.dataset.duration) || 8500;
-      let current = 0;
+      const requestedSlide = Number(new URLSearchParams(window.location.search).get('slide'));
+      let current = Number.isInteger(requestedSlide) && requestedSlide >= 0 && requestedSlide < slides.length ? requestedSlide : 0;
       let paused = false;
       let timer: number;
 
@@ -92,7 +108,7 @@ const slideDuration = 8500;
         if (event.key === ' ') { event.preventDefault(); togglePause(); }
       });
       document.addEventListener('visibilitychange', () => document.hidden ? window.clearTimeout(timer) : restart());
-      restart();
+      show(current);
     </script>
   </body>
 </html>
@@ -135,6 +151,11 @@ const slideDuration = 8500;
   h1 { margin: 0; max-width: 900px; font-family: 'Futura', 'Montserrat', sans-serif; font-size: clamp(4rem, 8.6vw, 10.5rem); line-height: .82; letter-spacing: -.075em; text-transform: uppercase; }
   .script { position: relative; z-index: 2; width: max-content; max-width: 100%; margin: .35rem 0 1.2rem clamp(1rem, 6vw, 6rem); font-family: var(--script); font-size: clamp(2.2rem, 4.25vw, 5.25rem); line-height: .95; color: var(--red); transform: rotate(-3deg); }
   .description { max-width: 540px; margin: 0 0 1.6rem; font-size: clamp(.9rem, 1.2vw, 1.2rem); line-height: 1.65; font-weight: 500; }
+  .facts { display: flex; flex-wrap: wrap; gap: .5rem; max-width: 720px; margin: -.5rem 0 1.5rem; padding: 0; list-style: none; }
+  .facts li { padding: .56rem .72rem; border: 1px solid currentColor; border-radius: 999px; font-size: clamp(.58rem, .72vw, .72rem); line-height: 1.15; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; background: color-mix(in srgb, currentColor 7%, transparent); }
+  .slide-compare .copy { width: min(760px, 55vw); }
+  .slide-compare .facts { display: grid; grid-template-columns: 1fr 1fr; gap: .55rem; max-width: 700px; }
+  .slide-compare .facts li { border-radius: .3rem; padding: .72rem .8rem; background: color-mix(in srgb, currentColor 10%, transparent); }
   .service-note { position: absolute; right: clamp(1.5rem, 4vw, 5rem); bottom: 2rem; z-index: 3; margin: 0; font-size: .58rem; font-weight: 800; text-transform: uppercase; letter-spacing: .14em; }
   .controls { position: fixed; z-index: 30; left: clamp(1.5rem, 4vw, 5rem); right: clamp(1.5rem, 4vw, 5rem); bottom: 1.4rem; display: flex; align-items: center; width: min(560px, 46vw); gap: .7rem; }
   .control, .progress button { border: 0; background: transparent; cursor: pointer; }
@@ -167,6 +188,9 @@ const slideDuration = 8500;
     h1 { font-size: clamp(3.6rem, 13vw, 8rem); }
     .script { margin-left: 3vw; font-size: clamp(2.35rem, 8vw, 5rem); }
     .description { max-width: 700px; font-size: clamp(.92rem, 2.5vw, 1.4rem); }
+    .facts { max-width: 760px; }
+    .facts li { font-size: clamp(.6rem, 1.6vw, .82rem); }
+    .slide-compare .copy { width: auto; }
     .service-note { display: none; }
     .controls { left: 7vw; bottom: 2rem; width: 86vw; }
   }
@@ -180,6 +204,10 @@ const slideDuration = 8500;
     h1 { font-size: clamp(3.25rem, 16vw, 5.5rem); }
     .script { font-size: clamp(2rem, 10vw, 3.7rem); }
     .description { margin-bottom: 1.1rem; font-size: .82rem; line-height: 1.5; }
+    .facts { gap: .35rem; margin-bottom: 1rem; }
+    .facts li { padding: .45rem .55rem; font-size: .55rem; }
+    .slide-compare .facts { grid-template-columns: 1fr; gap: .3rem; }
+    .slide-compare .facts li { padding: .48rem .56rem; }
     .book-main { padding: .8rem 1.15rem; font-size: .62rem; }
     .controls { left: 1.1rem; right: 1.1rem; bottom: 1.1rem; width: auto; }
     .previous, .next { display: none; }
